@@ -46,3 +46,10 @@ def getTodos(request):
     todos = Todo.objects.all()
     serializer = TodoSerializer(todos, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getTodo(request, pk):
+    todo = Todo.objects.get(id=pk)
+    serializer = TodoSerializer(todo, many=False)
+    return Response(serializer.data)
