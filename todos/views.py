@@ -53,3 +53,14 @@ def getTodo(request, pk):
     todo = Todo.objects.get(id=pk)
     serializer = TodoSerializer(todo, many=False)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def createTodo(request):
+    data = request.data
+
+    todo = Todo.objects.create(
+        body = data['body']
+    )
+    serializer = TodoSerializer(todo, many=False)
+    return Response(serializer.data)
